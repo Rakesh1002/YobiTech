@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# YOBITECH Website
+
+Official website for YOBITECH SERVICES PRIVATE LIMITED, built with modern web technologies.
+
+## Overview
+
+YOBITECH is a technology company specializing in AI-powered enterprise solutions, software development, and digital transformation services. This website showcases our services and provides a way for potential clients to get in touch.
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Components:** Shadcn UI
+- **Animations:** Framer Motion
+- **Database:** PostgreSQL (Neon)
+- **ORM:** Prisma
+- **Deployment:** Vercel
+
+## Features
+
+- 🎨 Modern, responsive design
+- 🌊 Smooth scroll animations
+- 📱 Mobile-first approach
+- 📝 Contact form with server-side validation
+- 🗃️ PostgreSQL database integration
+- 🎭 Interactive UI elements
+- 🔍 SEO optimized
+- 🖼️ Optimized image loading
+- 🚀 Fast page loads
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository:**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yobitech/website.git
+cd website
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Install dependencies:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory with:
 
-## Learn More
+```env
+DATABASE_URL="your_postgresql_url"
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Run database migrations:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npx prisma migrate dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. **Start the development server:**
 
-## Deploy on Vercel
+```bash
+pnpm dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Visit [http://localhost:3000](http://localhost:3000) to see the website.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project Structure
+
+```
+├── src/
+│   ├── app/              # Next.js app router
+│   ├── components/       # React components
+│   │   ├── sections/    # Page sections
+│   │   └── ui/         # Reusable UI components
+│   ├── lib/             # Utility functions
+│   └── hooks/           # Custom React hooks
+├── prisma/              # Database schema
+├── public/              # Static assets
+└── scripts/             # Build scripts
+```
+
+## Development
+
+- Run `pnpm dev` for development
+- Run `pnpm build` to create production build
+- Run `pnpm start` to start production server
+- Run `pnpm generate-logos` to generate logo assets
+
+## Contributing
+
+While this is a private project, we welcome feedback and suggestions. Please create an issue to discuss potential improvements.
+
+## License
+
+Copyright © 2024 YOBITECH SERVICES PRIVATE LIMITED. All rights reserved.
