@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -18,8 +19,16 @@ export function Footer() {
             </span>
           </div>
 
-          <div className="text-sm text-muted-foreground">
-            © 2024 YOBITECH SERVICES PRIVATE LIMITED. All rights reserved.
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <Link href="/terms" className="text-sm text-muted-foreground hover:underline">
+              Terms & Conditions
+            </Link>
+            <Link href="/refunds" className="text-sm text-muted-foreground hover:underline">
+              Cancellation & Refunds
+            </Link>
+            <div className="text-sm text-muted-foreground">
+              © 2024 YOBITECH SERVICES PRIVATE LIMITED. All rights reserved.
+            </div>
           </div>
         </div>
       </div>
