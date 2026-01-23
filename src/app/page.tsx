@@ -22,7 +22,8 @@ export default function Home() {
             url: "https://yobitech.in",
             logo: "https://yobitech.in/logo.png",
             description:
-              "Leading provider of AI solutions and digital transformation services",
+              "We partner with forward-thinking enterprises to design, build, and deploy AI-native applications that transform operations and unlock new possibilities.",
+            foundingDate: "2023",
             address: {
               "@type": "PostalAddress",
               streetAddress:
@@ -41,6 +42,14 @@ export default function Home() {
             sameAs: [
               "https://www.linkedin.com/company/yobitech",
               "https://twitter.com/yobitech",
+            ],
+            knowsAbout: [
+              "Artificial Intelligence",
+              "Machine Learning",
+              "Large Language Models",
+              "Cloud Infrastructure",
+              "Software Development",
+              "Digital Transformation",
             ],
           }),
         }}

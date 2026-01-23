@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone, ExternalLink, Loader2 } from "lucide-react";
+import { MapPin, Mail, Phone, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,9 +18,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const {
     register,
@@ -36,9 +34,7 @@ export function Contact() {
       setIsSubmitting(true);
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
 
@@ -56,70 +52,68 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-muted/50">
+    <section id="contact" className="py-24 bg-gradient-to-b from-muted/50 to-background">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
-          <p className="text-muted-foreground">
-            Reach out to us for any inquiries
+          <p className="text-primary font-medium mb-3">Contact Us</p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Let&apos;s Build Something Great</h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Have a project in mind? We&apos;d love to hear about it. Reach out and let&apos;s explore how we can help.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-5 gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-6"
+            className="lg:col-span-2 space-y-8"
           >
             <div className="flex items-start gap-4">
-              <MapPin className="w-5 h-5 text-primary mt-1" />
-              <div className="space-y-2">
-                <h3 className="font-semibold mb-1">Address</h3>
-                <p className="text-muted-foreground">
-                  Smart Avenu, Unit FO-02, 4th Floor, 28/A,
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <MapPin className="w-5 h-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Office</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Smart Avenu, Unit FO-02, 4th Floor,
                   <br />
-                  80 Feet Rd, Michael Palaya, Indiranagar,
+                  28/A, 80 Feet Rd, Indiranagar,
                   <br />
-                  Bangalore-560038, Karnataka
+                  Bangalore - 560038, Karnataka
                 </p>
-                <a
-                  href="https://maps.google.com/?q=Smart+Avenu+80+Feet+Road+Indiranagar+Bangalore"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-                >
-                  Get Directions
-                  <ExternalLink className="w-3 h-3" />
-                </a>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Mail className="w-5 h-5 text-primary" />
+
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <Mail className="w-5 h-5 text-primary" />
+              </div>
               <div>
-                <h3 className="font-semibold mb-1">Email</h3>
+                <h3 className="font-semibold mb-2">Email</h3>
                 <a
                   href="mailto:contact@yobitech.in"
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   contact@yobitech.in
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Phone className="w-5 h-5 text-primary" />
+
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <Phone className="w-5 h-5 text-primary" />
+              </div>
               <div>
-                <h3 className="font-semibold mb-1">Phone</h3>
+                <h3 className="font-semibold mb-2">Phone</h3>
                 <a
                   href="tel:+919019545645"
-                  className="text-muted-foreground hover:text-primary"
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
                   +91 90195 45645
                 </a>
@@ -131,76 +125,75 @@ export function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-background p-6 rounded-xl border"
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-              <div>
-                <input
-                  {...register("name")}
-                  type="text"
-                  placeholder="Your Name"
-                  className={`w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-                    errors.name ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.name && (
-                  <p className="mt-1 text-sm text-red-500">
-                    {errors.name.message}
-                  </p>
-                )}
-              </div>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <input
+                    {...register("name")}
+                    type="text"
+                    placeholder="Your name"
+                    className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all ${
+                      errors.name ? "border-red-500" : "border-border"
+                    }`}
+                  />
+                  {errors.name && (
+                    <p className="mt-1.5 text-xs text-red-500">{errors.name.message}</p>
+                  )}
+                </div>
 
-              <div>
-                <input
-                  {...register("email")}
-                  type="email"
-                  placeholder="Your Email"
-                  className={`w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-                    errors.email ? "border-red-500" : ""
-                  }`}
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">
-                    {errors.email.message}
-                  </p>
-                )}
+                <div>
+                  <input
+                    {...register("email")}
+                    type="email"
+                    placeholder="Your email"
+                    className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all ${
+                      errors.email ? "border-red-500" : "border-border"
+                    }`}
+                  />
+                  {errors.email && (
+                    <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>
+                  )}
+                </div>
               </div>
 
               <div>
                 <textarea
                   {...register("message")}
-                  placeholder="Your Message"
-                  rows={4}
-                  className={`w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-                    errors.message ? "border-red-500" : ""
+                  placeholder="Tell us about your project..."
+                  rows={5}
+                  className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all resize-none ${
+                    errors.message ? "border-red-500" : "border-border"
                   }`}
                 />
                 {errors.message && (
-                  <p className="mt-1 text-sm text-red-500">
-                    {errors.message.message}
-                  </p>
+                  <p className="mt-1.5 text-xs text-red-500">{errors.message.message}</p>
                 )}
               </div>
 
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full ${
+                size="lg"
+                className={`w-full sm:w-auto rounded-xl transition-all ${
                   submitStatus === "success"
-                    ? "bg-green-500 hover:bg-green-600"
+                    ? "bg-green-600 hover:bg-green-700"
                     : submitStatus === "error"
-                      ? "bg-red-500 hover:bg-red-600"
+                      ? "bg-red-600 hover:bg-red-700"
                       : "bg-primary hover:bg-primary/90"
                 }`}
               >
                 {isSubmitting ? (
                   <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                ) : null}
+                ) : (
+                  <Send className="w-4 h-4 mr-2" />
+                )}
                 {submitStatus === "success"
                   ? "Message Sent!"
                   : submitStatus === "error"
-                    ? "Failed to Send"
+                    ? "Failed - Try Again"
                     : "Send Message"}
               </Button>
             </form>

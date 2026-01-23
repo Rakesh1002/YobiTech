@@ -10,18 +10,20 @@ const geist = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL("https://yobitech.in"),
   title: {
-    default: "YOBITECH - Enterprise AI Solutions & Digital Transformation",
+    default: "YOBITECH - AI-Powered Enterprise Solutions",
     template: "%s | YOBITECH",
   },
   description:
-    "YOBITECH SERVICES PRIVATE LIMITED specializes in AI-powered enterprise solutions, software development, and digital transformation services for modern businesses.",
+    "YOBITECH helps enterprises build intelligent systems with AI, modern software engineering, and cloud infrastructure. Based in Bangalore, serving globally.",
   keywords: [
     "AI Solutions",
+    "Machine Learning",
+    "LLM Integration",
     "Enterprise Software",
+    "Product Engineering",
+    "Cloud Infrastructure",
     "Digital Transformation",
-    "SaaS Platform",
-    "Business Automation",
-    "Technology Services",
+    "Software Development",
     "Bangalore",
     "India",
   ],
@@ -46,24 +48,24 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: "https://yobitech.in",
-    title: "YOBITECH - Leading AI Solutions & Digital Transformation Company",
+    title: "YOBITECH - AI-Powered Enterprise Solutions",
     description:
-      "Transform your business with cutting-edge AI solutions, enterprise software development, and digital transformation services. Based in Bangalore, serving globally.",
+      "We partner with forward-thinking enterprises to design, build, and deploy AI-native applications that transform operations and unlock new possibilities.",
     siteName: "YOBITECH",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "YOBITECH - Enterprise AI Solutions & Digital Transformation",
+        alt: "YOBITECH - AI-Powered Enterprise Solutions",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "YOBITECH - AI Solutions & Digital Transformation",
+    title: "YOBITECH - AI-Powered Enterprise Solutions",
     description:
-      "Transform your business with our AI-powered enterprise solutions and digital transformation services. Bangalore-based, globally focused.",
+      "We partner with enterprises to build intelligent systems with AI, modern engineering, and cloud infrastructure.",
     images: ["/og-image.png"],
     creator: "@yobitech",
     site: "@yobitech",
