@@ -1,193 +1,139 @@
-"use client";
-
+import type { Metadata } from "next";
+import Link from "next/link";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
-import Link from "next/link";
 
-export default function CancellationAndRefunds() {
+export const metadata: Metadata = {
+  title: "Refund & Acceptance-Criteria Policy",
+  description:
+    "How YobiTech's money-back acceptance clause works. Production Agent SKU is refundable if we miss the Day-30 signed test suite.",
+  alternates: { canonical: "https://yobitech.in/refunds" },
+};
+
+export default function RefundsPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: "Cancellation & Refund Policy | YOBITECH",
-            description: "Cancellation and Refund Policy for YOBITECH SERVICES PRIVATE LIMITED",
-            url: "https://yobitech.in/refunds",
-          }),
-        }}
-      />
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <main className="flex-1 pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
           <div className="mb-10">
-            <h1 className="text-3xl font-bold mb-4">Cancellation & Refund Policy</h1>
-            <p className="text-gray-500">Last updated on 26-03-2025 10:11:40</p>
+            <h1 className="text-4xl font-bold mb-3 tracking-tight">
+              Refund & Acceptance-Criteria Policy
+            </h1>
+            <p className="text-sm text-muted-foreground">Effective 2026-05-23</p>
           </div>
-          
-          <div className="prose prose-slate prose-lg max-w-none">
+
+          <div className="prose prose-slate dark:prose-invert prose-lg max-w-none">
+            <p className="lead text-lg text-muted-foreground leading-relaxed">
+              <strong className="text-foreground">Plain summary:</strong> On the Production Agent SKU
+              ($60,000 / 30 days), we sign an acceptance-criteria document with you on Day 0. On Day 30
+              we run that test suite with you live. If even one P0 (must-pass) criterion fails, you keep
+              the code and we refund 100% of fees within 14 business days.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">1. When the refund applies</h2>
             <p>
-              YOBITECH SERVICES PRIVATE LIMITED believes in helping its customers as far as possible, and has therefore a liberal cancellation policy. This policy outlines the guidelines and procedures for cancellations, returns, and refunds for our products and services.
+              The money-back acceptance clause applies <strong>only</strong> to the Production Agent SKU
+              ($60,000, 30-day delivery window). It does not apply to:
             </p>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">1. General Cancellation Policy</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
-              <li>
-                Cancellations will be considered only if the request is made immediately after placing the order. However, the cancellation request may not be entertained if the orders have been communicated to the vendors/merchants and they have initiated the process of shipping them.
-              </li>
-              
-              <li>
-                YOBITECH SERVICES PRIVATE LIMITED does not accept cancellation requests for perishable items like flowers, eatables etc. However, refund/replacement can be made if the customer establishes that the quality of product delivered is not good.
-              </li>
-              
-              <li>
-                In case of receipt of damaged or defective items please report the same to our Customer Service team. The request will, however, be entertained once the merchant has checked and determined the same at his own end. This should be reported within 7 days of receipt of the products.
-              </li>
-              
-              <li>
-                In case you feel that the product received is not as shown on the site or as per your expectations, you must bring it to the notice of our customer service within 7 days of receiving the product. The Customer Service Team after looking into your complaint will take an appropriate decision.
-              </li>
-              
-              <li>
-                In case of complaints regarding products that come with a warranty from manufacturers, please refer the issue to them.
-              </li>
+            <ul className="list-disc pl-6 space-y-1">
+              <li><strong>Starter Agent ($30K, 30 days)</strong> — non-refundable once kickoff occurs (scope is too tight to risk-share economically).</li>
+              <li><strong>Agent Fleet ($120K, 60 days)</strong> — has its own partial-refund schedule (see Section 7).</li>
+              <li><strong>Retainer fees</strong> — non-refundable per month, but cancellable on 30-day notice.</li>
+              <li><strong>Change orders</strong> — billed and paid for separately, non-refundable.</li>
             </ul>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">2. Digital Products and Services</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">2. How the refund test works</h2>
+            <ol className="list-decimal pl-6 space-y-2">
               <li>
-                For digital products and services, including software licenses, subscriptions, or digital content, a 7-day evaluation period is provided from the date of purchase. Refund requests made within this period will be considered if the product does not function as described or if technical issues prevent proper usage.
+                <strong>Day 0:</strong> We and you jointly sign an{" "}
+                <strong>Acceptance Criteria Document</strong> with measurable, plain-English P0 and P1 criteria.
+                P0 = must-pass for delivery; P1 = nice-to-have, not refund-triggering.
               </li>
-              
               <li>
-                Once digital content has been accessed, downloaded, or used substantially, we reserve the right to decline refund requests unless the product is demonstrably defective or not as described.
+                <strong>Day 30:</strong> We run the signed test suite live with you (Zoom / Google Meet recorded).
+                Each P0 criterion either passes or fails.
               </li>
-              
               <li>
-                Subscription-based services may be cancelled at any time, but refunds will only be issued for the unused portion of the service if the cancellation is made within the first 30 days of service. After 30 days, you may cancel your subscription to prevent future billing, but refunds for the current billing period will not be provided.
+                <strong>Pass:</strong> Final 50% invoice clears. Retainer SOW offered.
               </li>
-              
               <li>
-                Custom development projects, consulting services, or other bespoke services are non-refundable once work has commenced, unless otherwise specified in a separate service agreement.
+                <strong>Fail (any P0):</strong> 100% of paid fees (both deposit and final, if final has cleared)
+                are refunded within 14 business days. You keep all code shipped.
               </li>
-            </ul>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">3. Non-Refundable Items</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
-              <li>
-                The following items and services are generally non-refundable:
-                <ul className="list-disc pl-6 mt-2">
-                  <li>Gift cards or vouchers</li>
-                  <li>Downloadable software products after the license key has been issued</li>
-                  <li>Services that have been fully performed</li>
-                  <li>Custom-made or personalized products</li>
-                  <li>Products or services marked as non-refundable at the time of purchase</li>
-                </ul>
-              </li>
-            </ul>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">4. Refund Process</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
-              <li>
-                To initiate a refund request, please contact our customer service team through the following methods:
-                <ul className="list-disc pl-6 mt-2">
-                  <li>Email: <Link href="mailto:refunds@yobitech.in" className="text-primary hover:underline">refunds@yobitech.in</Link></li>
-                  <li>Phone: +91-90195-45645</li>
-                  <li>Contact form on our website</li>
-                </ul>
-              </li>
-              
-              <li>
-                Please provide the following information when requesting a refund:
-                <ul className="list-disc pl-6 mt-2">
-                  <li>Order number or invoice number</li>
-                  <li>Date of purchase</li>
-                  <li>Item(s) for which refund is requested</li>
-                  <li>Reason for the refund request</li>
-                  <li>Proof of purchase (receipt or order confirmation)</li>
-                  <li>Photos or videos if claiming product damage or defect</li>
-                </ul>
-              </li>
-              
-              <li>
-                Our customer service team will review your request and respond within 2 business days. Additional documentation or information may be requested to process your refund.
-              </li>
-            </ul>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">5. Refund Processing Time</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
-              <li>
-                In case of any refunds approved by YOBITECH SERVICES PRIVATE LIMITED, it&apos;ll take 1-2 days for the refund to be processed to the end customer.
-              </li>
-              
-              <li>
-                Refunds will be made to the original payment method used for the purchase. If this is not possible, an alternative refund method may be arranged.
-              </li>
-              
-              <li>
-                Please note that while we process refunds promptly, it may take 5-7 additional business days for the funds to reflect in your account, depending on your financial institution or payment provider.
-              </li>
-            </ul>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">6. Return Shipping</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
-              <li>
-                If a return is required for physical products, we will provide instructions on how to ship the items back to us.
-              </li>
-              
-              <li>
-                In cases where the return is due to a product defect, error on our part, or incorrect shipment, we will cover the return shipping costs.
-              </li>
-              
-              <li>
-                For returns based on customer preference or change of mind, the customer will be responsible for return shipping costs unless otherwise stated.
-              </li>
-              
-              <li>
-                Products must be returned in their original packaging with all accessories, manuals, and documentation.
-              </li>
-            </ul>
-            
-            <h2 className="text-xl font-bold mt-8 mb-4">7. Policy Changes</h2>
-            
-            <ul className="list-disc space-y-4 pl-6">
-              <li>
-                YOBITECH SERVICES PRIVATE LIMITED reserves the right to modify this Cancellation and Refund Policy at any time. Changes will be effective immediately upon posting on our website.
-              </li>
-              
-              <li>
-                The policy that was in effect at the time of your purchase will apply to your transaction.
-              </li>
-            </ul>
-            
-            <p className="font-semibold mt-6">
-              We strive to resolve all customer concerns promptly and fairly. If you have any questions about our Cancellation and Refund Policy, please contact our customer service team.
+            </ol>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">3. What you keep regardless</h2>
+            <p>
+              All source code shipped to you during the engagement is yours to keep, whether or not the
+              acceptance test passes. Refund does not require code return or any other clawback.
             </p>
-            
-            <div className="mt-8 border-t pt-8">
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">4. Conditions on the refund</h2>
+            <p>The money-back clause is voided if:</p>
+            <ul className="list-disc pl-6 space-y-1">
+              <li>You changed the scope mid-engagement without a signed change order.</li>
+              <li>You denied required access (eng, data, API keys, staging env) for more than 5 business days; timeline extends day-for-day in such cases.</li>
+              <li>The acceptance test was substantially modified by you between Day 0 signature and Day 30 execution without our agreement.</li>
+              <li>A force-majeure event prevented delivery (e.g., Cloudflare global outage during the acceptance test, regulatory shifts banning the agent shape).</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">5. How to invoke the refund</h2>
+            <p>
+              If a P0 criterion fails on Day 30:
+            </p>
+            <ul className="list-disc pl-6 space-y-1">
+              <li>The failure is noted live during the acceptance call (recorded).</li>
+              <li>We confirm the refund in writing within 2 business days.</li>
+              <li>Refund processed to the original payment method within 14 business days (additional bank-side delay may apply).</li>
+            </ul>
+            <p>
+              You do not need to file a separate claim or submit documentation. The signed acceptance criteria
+              document and the recorded test are sufficient.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">6. Disputes</h2>
+            <p>
+              If we disagree on whether a criterion failed, we will mediate in good faith. If we cannot reach
+              agreement within 14 business days, the matter is resolved per jurisdiction below (Section 8).
+              We have never invoked dispute resolution; we don&apos;t plan to.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">7. Agent Fleet partial refund schedule</h2>
+            <p>
+              The Agent Fleet SKU ($120K / 60 days) is built incrementally with two acceptance gates: Day 30
+              (single-agent gate) and Day 60 (multi-agent coordination gate).
+            </p>
+            <ul className="list-disc pl-6 space-y-1">
+              <li><strong>Day 30 P0 failure:</strong> 50% refund (initial deposit). Engagement ends.</li>
+              <li><strong>Day 30 pass, Day 60 P0 failure:</strong> 33% partial refund (refund of milestone payment). You keep all code.</li>
+              <li><strong>Day 30 and Day 60 pass:</strong> Full payment recognized.</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">8. Jurisdiction</h2>
+            <p>
+              This policy is governed by the laws of India. Disputes are subject to the exclusive jurisdiction
+              of the courts of Bangalore North.
+            </p>
+
+            <h2 className="text-2xl font-bold mt-10 mb-4">9. Contact</h2>
+            <p>For refund-related questions:</p>
+            <address className="not-italic mt-2 text-muted-foreground">
+              <p>YOBITECH SERVICES PRIVATE LIMITED</p>
+              <p>Smart Avenu, Unit FO-02, 4th Floor, 28/A, 80 Feet Rd</p>
+              <p>Indiranagar, Bangalore - 560038</p>
               <p>
-                For any questions or concerns about our Cancellation and Refund Policy, please contact us at:
+                Email:{" "}
+                <Link href="mailto:contact@yobitech.in" className="text-primary hover:underline">
+                  contact@yobitech.in
+                </Link>
               </p>
-              <address className="not-italic mt-2">
-                <p>YOBITECH SERVICES PRIVATE LIMITED</p>
-                <p>Smart Avenu, Unit FO-02, 4th Floor, 28/A, 80 Feet Rd</p>
-                <p>Indiranagar, Bangalore - 560038</p>
-                <p>Email: <Link href="mailto:contact@yobitech.in" className="text-primary hover:underline">contact@yobitech.in</Link></p>
-                <p>Phone: +91-90195-45645</p>
-              </address>
-            </div>
+              <p>Phone: +91-90195-45645</p>
+            </address>
           </div>
         </main>
         <Footer />
       </div>
     </>
   );
-} 
+}

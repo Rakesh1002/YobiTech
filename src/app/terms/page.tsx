@@ -1,30 +1,23 @@
-"use client";
-
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
 import Link from "next/link";
 
+export const metadata: Metadata = {
+  title: "Terms and Conditions",
+  description: "Terms and Conditions for YOBITECH SERVICES PRIVATE LIMITED",
+  alternates: { canonical: "https://yobitech.in/terms" },
+};
+
 export default function TermsAndConditions() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            name: "Terms and Conditions | YOBITECH",
-            description: "Terms and Conditions for YOBITECH SERVICES PRIVATE LIMITED",
-            url: "https://yobitech.in/terms",
-          }),
-        }}
-      />
       <div className="min-h-screen flex flex-col">
         <Navbar />
-        <main className="flex-1 py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <main className="flex-1 pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <div className="mb-10">
             <h1 className="text-3xl font-bold mb-4">Terms and Conditions</h1>
-            <p className="text-gray-500">Last updated on 26-03-2025 10:10:55</p>
+            <p className="text-sm text-muted-foreground">Effective 2026-05-23</p>
           </div>
           
           <div className="prose prose-slate prose-lg max-w-none">
@@ -136,15 +129,20 @@ export default function TermsAndConditions() {
               </li>
             </ol>
             
-            <h2 className="text-xl font-bold mt-8 mb-4">6. Refunds and Cancellations</h2>
-            
+            <h2 className="text-xl font-bold mt-8 mb-4">6. Refunds, Acceptance Criteria, and Cancellations</h2>
+
             <ol className="list-decimal space-y-4 pl-6" start={20}>
               <li>
-                You shall be entitled to claim a refund of the payment made by you in case we are not able to provide the Service. The timelines for such return and refund will be according to the specific Service you have availed or within the time period provided in our policies (as applicable). In case you do not raise a refund claim within the stipulated time, than this would make you ineligible for a refund.
+                The <strong>Production Agent SKU</strong> ($60,000 / 30 days) includes a money-back acceptance-criteria clause: if any P0 criterion in the signed Day-0 acceptance document fails when tested live on Day 30, you receive a 100% refund and keep all code shipped.
               </li>
-              
               <li>
-                For detailed information about our refund and cancellation policies, please refer to our <Link href="/refunds" className="text-primary hover:underline">Cancellation & Refund Policy</Link>.
+                The <strong>Starter Agent SKU</strong> ($30,000) is non-refundable once kickoff has occurred. The <strong>Agent Fleet SKU</strong> ($120,000) has a partial-refund schedule tied to two acceptance gates.
+              </li>
+              <li>
+                <strong>Retainer fees</strong> are non-refundable per month but cancellable on 30-day written notice.
+              </li>
+              <li>
+                Full refund mechanics, edge cases (scope changes, access denial, force majeure), and the dispute process are documented in our <Link href="/refunds" className="text-primary hover:underline">Refund &amp; Acceptance-Criteria Policy</Link>.
               </li>
             </ol>
             

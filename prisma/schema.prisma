@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,9 +11,16 @@ datasource db {
 }
 
 model ContactMessage {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  message   String
-  createdAt DateTime @default(now())
+  id            String   @id @default(cuid())
+  name          String
+  email         String
+  company       String?
+  headcountBand String?
+  aiStage       String?
+  budgetBand    String?
+  skuInterest   String?
+  failedPilot   Boolean  @default(false)
+  message       String
+  source        String?
+  createdAt     DateTime @default(now())
 }
