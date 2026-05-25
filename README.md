@@ -1,96 +1,92 @@
-# YOBITECH Website
+# YobiTech
 
-Official website for YOBITECH SERVICES PRIVATE LIMITED, built with modern web technologies.
+Marketing site for **YobiTech** — a boutique that ships production AI agents on Cloudflare in 30 days, fixed fee, money-back if it misses acceptance criteria.
 
-## Overview
+Live at [yobitech.in](https://yobitech.in).
 
-YOBITECH is a technology company specializing in AI-powered enterprise solutions, software development, and digital transformation services. This website showcases our services and provides a way for potential clients to get in touch.
+Operated by [YOBITECH SERVICES PRIVATE LIMITED](https://www.mca.gov.in/) (CIN U66190KA2023PTC171906).
 
-## Tech Stack
+## Stack
 
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 15 (App Router, Turbopack dev) + React 19
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Components:** Shadcn UI
+- **Styling:** Tailwind CSS + shadcn/ui (button, card, label, input, textarea, select, checkbox, form, badge)
 - **Animations:** Framer Motion
-- **Database:** PostgreSQL (Neon)
-- **ORM:** Prisma
-- **Deployment:** Vercel
+- **Forms:** react-hook-form + Zod
+- **Database:** PostgreSQL (Neon, ap-southeast-1) via Prisma
+- **Hosting:** Cloudflare Workers (via OpenNext for Next.js)
+- **Domains:** yobitech.in, www.yobitech.in (bound in `wrangler.jsonc`)
 
-## Features
+## Routes
 
-- 🎨 Modern, responsive design
-- 🌊 Smooth scroll animations
-- 📱 Mobile-first approach
-- 📝 Contact form with server-side validation
-- 🗃️ PostgreSQL database integration
-- 🎭 Interactive UI elements
-- 🔍 SEO optimized
-- 🖼️ Optimized image loading
-- 🚀 Fast page loads
+| Route | Purpose |
+|---|---|
+| `/` | Single-page positioning (Hero / Proof / SKUs / How-it-works / Money-back / Tech / We-don't-do / About / Contact) |
+| `/pricing` | 3 SKUs in detail + retainer tiers + FAQ |
+| `/work` | Case-study index |
+| `/playbook` | Build-diary blog |
+| `/refunds` | Acceptance-criteria refund clause |
+| `/terms` | Standard terms of service |
+| `/api/contact` | Hardened lead capture (Turnstile + rate-limit + Resend) |
 
-## Getting Started
-
-1. **Clone the repository:**
-
-```bash
-git clone https://github.com/yobitech/website.git
-cd website
-```
-
-2. **Install dependencies:**
+## Local development
 
 ```bash
 pnpm install
-```
-
-3. **Set up environment variables:**
-   Create a `.env` file in the root directory with:
-
-```env
-DATABASE_URL="your_postgresql_url"
-```
-
-4. **Run database migrations:**
-
-```bash
-npx prisma migrate dev
-```
-
-5. **Start the development server:**
-
-```bash
+cp .env.example .env
+# Fill in DATABASE_URL, TURNSTILE keys, RESEND_API_KEY
+pnpm prisma generate
 pnpm dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see the website.
+Visit [http://localhost:3000](http://localhost:3000).
 
-## Project Structure
+## Build & deploy
 
-```
-├── src/
-│   ├── app/              # Next.js app router
-│   ├── components/       # React components
-│   │   ├── sections/    # Page sections
-│   │   └── ui/         # Reusable UI components
-│   ├── lib/             # Utility functions
-│   └── hooks/           # Custom React hooks
-├── prisma/              # Database schema
-├── public/              # Static assets
-└── scripts/             # Build scripts
+```bash
+pnpm build              # Next build (Vercel-style)
+pnpm build:cf           # Next build + OpenNext for Cloudflare Workers
+pnpm preview:cf         # Local Cloudflare Workers preview via wrangler
+pnpm deploy:cf          # Deploy to yobitech.in / www.yobitech.in
 ```
 
-## Development
+For Cloudflare deploys, set secrets via `wrangler`:
 
-- Run `pnpm dev` for development
-- Run `pnpm build` to create production build
-- Run `pnpm start` to start production server
-- Run `pnpm generate-logos` to generate logo assets
+```bash
+wrangler secret put DATABASE_URL
+wrangler secret put TURNSTILE_SECRET_KEY
+wrangler secret put RESEND_API_KEY
+```
 
-## Contributing
+## Project structure
 
-While this is a private project, we welcome feedback and suggestions. Please create an issue to discuss potential improvements.
+```
+src/
+├── app/
+│   ├── layout.tsx              # Metadata, OG, JSON-LD (Organization + Service schemas)
+│   ├── page.tsx                # Single-page composition
+│   ├── globals.css
+│   ├── api/contact/route.ts    # Hardened lead capture
+│   ├── pricing/page.tsx        # SKU detail
+│   ├── work/page.tsx           # Case studies
+│   ├── playbook/page.tsx       # Build diaries
+│   ├── refunds/page.tsx        # Acceptance-criteria money-back clause
+│   └── terms/page.tsx
+├── components/
+│   ├── sections/               # Page sections
+│   └── ui/                     # shadcn primitives (curated subset)
+├── lib/                        # prisma client, cn utility
+└── hooks/
+prisma/schema.prisma            # ContactMessage model
+public/                         # Static assets
+scripts/generate-logos.mjs      # Sharp-based logo generator
+wrangler.jsonc                  # Cloudflare Workers config
+```
+
+## Strategy
+
+Internal strategy docs live at `STRATEGY.md` (canonical narrative) and `docs/strategy/` (supporting docs). Both paths are gitignored — the repo is public, the strategy is not.
 
 ## License
 
-Copyright © 2024 YOBITECH SERVICES PRIVATE LIMITED. All rights reserved.
+Copyright © 2026 YOBITECH SERVICES PRIVATE LIMITED. All rights reserved.

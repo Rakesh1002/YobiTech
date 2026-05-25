@@ -42,3 +42,10 @@ next-env.d.ts
 
 # prisma
 /prisma/migrations/
+
+# wrangler
+.wrangler
+
+# strategy docs (private — repo is public on GitHub)
+/STRATEGY.md
+/docs/strategy/

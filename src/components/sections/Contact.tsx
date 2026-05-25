@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Mail, Phone, Send, Loader2 } from "lucide-react";
+import { MapPin, Mail, Phone, Send, Loader2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,14 +11,23 @@ import { useState } from "react";
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
+  company: z.string().min(1, "Company is required").max(100),
+  headcountBand: z.enum(["<10", "10-50", "50-500", "500+"]),
+  aiStage: z.enum(["none", "poc-failed", "production-scaling", "other"]),
+  budgetBand: z.enum(["<25k", "25-60k", "60-120k", "120k+"]),
+  skuInterest: z.enum(["starter", "production", "fleet", "unsure"]),
+  failedPilot: z.boolean().optional(),
+  message: z.string().max(2000).optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
+const CAL_URL = "https://cal.com/yobitech/30min";
+
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [showForm, setShowForm] = useState(false);
 
   const {
     register,
@@ -27,6 +36,13 @@ export function Contact() {
     formState: { errors },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      headcountBand: "50-500",
+      aiStage: "poc-failed",
+      budgetBand: "25-60k",
+      skuInterest: "production",
+      failedPilot: false,
+    },
   });
 
   const onSubmit = async (data: ContactFormData) => {
@@ -35,17 +51,17 @@ export function Contact() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, source: "homepage" }),
       });
 
       if (!response.ok) throw new Error("Failed to send message");
 
       setSubmitStatus("success");
       reset();
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      setTimeout(() => setSubmitStatus("idle"), 4000);
     } catch {
       setSubmitStatus("error");
-      setTimeout(() => setSubmitStatus("idle"), 3000);
+      setTimeout(() => setSubmitStatus("idle"), 4000);
     } finally {
       setIsSubmitting(false);
     }
@@ -58,22 +74,45 @@ export function Contact() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <p className="text-primary font-medium mb-3">Contact Us</p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Let&apos;s Build Something Great</h2>
+          <p className="text-primary font-medium mb-3">Get started</p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Tell us about your project. Or just book a call.
+          </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Have a project in mind? We&apos;d love to hear about it. Reach out and let&apos;s explore how we can help.
+            Rakesh reads every inquiry. No sales pipelines, no nurture sequences. Response within 24 hours.
           </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-12">
+          {/* Left column: contact info + primary Cal.com CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-2 space-y-8"
           >
+            <a
+              href={CAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-6 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 to-background hover:border-primary/50 transition-all group"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-10 h-10 rounded-lg bg-primary/15 flex items-center justify-center">
+                  <Calendar className="w-5 h-5 text-primary" />
+                </div>
+                <h3 className="font-semibold">Book a 30-min discovery call</h3>
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">
+                Founder on the call. No deck. We&apos;ll sketch your architecture live.
+              </p>
+              <span className="text-sm font-medium text-primary group-hover:underline">
+                Open calendar →
+              </span>
+            </a>
+
             <div className="flex items-start gap-4">
               <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5 text-primary" />
@@ -121,6 +160,7 @@ export function Contact() {
             </div>
           </motion.div>
 
+          {/* Right column: qualifying form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,75 +168,168 @@ export function Contact() {
             transition={{ delay: 0.1 }}
             className="lg:col-span-3"
           >
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              <div className="grid sm:grid-cols-2 gap-5">
+            {!showForm ? (
+              <div className="rounded-2xl border bg-background/50 p-8 text-center h-full flex flex-col items-center justify-center">
+                <p className="text-sm text-muted-foreground mb-4">Prefer email over a call?</p>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="rounded-full"
+                  onClick={() => setShowForm(true)}
+                >
+                  Open the qualifying form
+                </Button>
+                <p className="text-xs text-muted-foreground mt-4">
+                  Takes 60 seconds. Helps us prep before we reply.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 rounded-2xl border bg-background/50 p-6">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-1.5 block">Your name</label>
+                    <input
+                      {...register("name")}
+                      type="text"
+                      className={`w-full px-4 py-2.5 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm ${
+                        errors.name ? "border-destructive" : "border-border"
+                      }`}
+                    />
+                    {errors.name && (
+                      <p className="mt-1 text-xs text-destructive">{errors.name.message}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-1.5 block">Work email</label>
+                    <input
+                      {...register("email")}
+                      type="email"
+                      className={`w-full px-4 py-2.5 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm ${
+                        errors.email ? "border-destructive" : "border-border"
+                      }`}
+                    />
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>
+                    )}
+                  </div>
+                </div>
+
                 <div>
+                  <label className="text-xs text-muted-foreground mb-1.5 block">Company</label>
                   <input
-                    {...register("name")}
+                    {...register("company")}
                     type="text"
-                    placeholder="Your name"
-                    className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all ${
-                      errors.name ? "border-red-500" : "border-border"
+                    className={`w-full px-4 py-2.5 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm ${
+                      errors.company ? "border-destructive" : "border-border"
                     }`}
                   />
-                  {errors.name && (
-                    <p className="mt-1.5 text-xs text-red-500">{errors.name.message}</p>
+                  {errors.company && (
+                    <p className="mt-1 text-xs text-destructive">{errors.company.message}</p>
                   )}
                 </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-1.5 block">Company size</label>
+                    <select
+                      {...register("headcountBand")}
+                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm"
+                    >
+                      <option value="<10">&lt;10</option>
+                      <option value="10-50">10–50</option>
+                      <option value="50-500">50–500</option>
+                      <option value="500+">500+</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-1.5 block">Stage of AI</label>
+                    <select
+                      {...register("aiStage")}
+                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm"
+                    >
+                      <option value="none">No AI yet</option>
+                      <option value="poc-failed">Built a POC, didn&apos;t ship</option>
+                      <option value="production-scaling">Production AI, need to scale</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-1.5 block">Budget band</label>
+                    <select
+                      {...register("budgetBand")}
+                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm"
+                    >
+                      <option value="<25k">&lt;$25K</option>
+                      <option value="25-60k">$25K–$60K</option>
+                      <option value="60-120k">$60K–$120K</option>
+                      <option value="120k+">$120K+</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="text-xs text-muted-foreground mb-1.5 block">SKU interest</label>
+                    <select
+                      {...register("skuInterest")}
+                      className="w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-sm"
+                    >
+                      <option value="starter">Starter ($30K)</option>
+                      <option value="production">Production ($60K)</option>
+                      <option value="fleet">Fleet ($120K)</option>
+                      <option value="unsure">Not sure</option>
+                    </select>
+                  </div>
+                </div>
+
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    {...register("failedPilot")}
+                    type="checkbox"
+                    className="w-4 h-4 rounded border-border accent-primary"
+                  />
+                  <span className="text-muted-foreground">We&apos;ve already burned budget on a failed pilot</span>
+                </label>
 
                 <div>
-                  <input
-                    {...register("email")}
-                    type="email"
-                    placeholder="Your email"
-                    className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all ${
-                      errors.email ? "border-red-500" : "border-border"
+                  <label className="text-xs text-muted-foreground mb-1.5 block">Anything we should know? (optional)</label>
+                  <textarea
+                    {...register("message")}
+                    rows={3}
+                    className={`w-full px-4 py-2.5 rounded-lg border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all resize-none text-sm ${
+                      errors.message ? "border-destructive" : "border-border"
                     }`}
                   />
-                  {errors.email && (
-                    <p className="mt-1.5 text-xs text-red-500">{errors.email.message}</p>
-                  )}
                 </div>
-              </div>
 
-              <div>
-                <textarea
-                  {...register("message")}
-                  placeholder="Tell us about your project..."
-                  rows={5}
-                  className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all resize-none ${
-                    errors.message ? "border-red-500" : "border-border"
+                <Button
+                  type="submit"
+                  disabled={isSubmitting || submitStatus === "success"}
+                  size="lg"
+                  className={`w-full rounded-lg transition-all ${
+                    submitStatus === "success"
+                      ? "bg-green-600 hover:bg-green-700"
+                      : submitStatus === "error"
+                        ? "bg-destructive hover:bg-destructive/90"
+                        : ""
                   }`}
-                />
-                {errors.message && (
-                  <p className="mt-1.5 text-xs text-red-500">{errors.message.message}</p>
-                )}
-              </div>
-
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                size="lg"
-                className={`w-full sm:w-auto rounded-xl transition-all ${
-                  submitStatus === "success"
-                    ? "bg-green-600 hover:bg-green-700"
+                >
+                  {isSubmitting ? (
+                    <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                  ) : (
+                    <Send className="w-4 h-4 mr-2" />
+                  )}
+                  {submitStatus === "success"
+                    ? "Got it. Rakesh will reply within 24 hours."
                     : submitStatus === "error"
-                      ? "bg-red-600 hover:bg-red-700"
-                      : "bg-primary hover:bg-primary/90"
-                }`}
-              >
-                {isSubmitting ? (
-                  <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                ) : (
-                  <Send className="w-4 h-4 mr-2" />
-                )}
-                {submitStatus === "success"
-                  ? "Message Sent!"
-                  : submitStatus === "error"
-                    ? "Failed - Try Again"
-                    : "Send Message"}
-              </Button>
-            </form>
+                      ? "Failed. Try again or email contact@yobitech.in"
+                      : "Send inquiry"}
+                </Button>
+              </form>
+            )}
           </motion.div>
         </div>
       </div>
