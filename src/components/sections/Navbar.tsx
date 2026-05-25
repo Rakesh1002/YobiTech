@@ -52,22 +52,22 @@ export function Navbar() {
         </div>
         <div className="hidden sm:flex items-center gap-8">
           <a
+            href="#pricing"
+            className="hover:text-primary transition-colors text-sm font-medium"
+          >
+            Pricing
+          </a>
+          <a
+            href="#stack"
+            className="hover:text-primary transition-colors text-sm font-medium"
+          >
+            Stack
+          </a>
+          <a
             href="#about"
             className="hover:text-primary transition-colors text-sm font-medium"
           >
             About
-          </a>
-          <a
-            href="#services"
-            className="hover:text-primary transition-colors text-sm font-medium"
-          >
-            Services
-          </a>
-          <a
-            href="#contact"
-            className="hover:text-primary transition-colors text-sm font-medium"
-          >
-            Contact
           </a>
           <Button
             size="sm"
@@ -75,7 +75,7 @@ export function Navbar() {
             className="rounded-full transition-colors"
             asChild
           >
-            <a href="#contact">Get Started</a>
+            <a href="#contact">Book a call</a>
           </Button>
         </div>
       </div>

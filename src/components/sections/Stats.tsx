@@ -1,13 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Rocket, Users2, TrendingUp } from "lucide-react";
+import { Timer, FileCheck2, Layers, Globe2 } from "lucide-react";
 
 const stats = [
-  { label: "Enterprise Clients", value: "30+", icon: Building2, description: "Trusted partners" },
-  { label: "Projects Delivered", value: "75+", icon: Rocket, description: "Across industries" },
-  { label: "Team Members", value: "40+", icon: Users2, description: "Expert engineers" },
-  { label: "YoY Growth", value: "85%", icon: TrendingUp, description: "Sustainable growth" },
+  {
+    label: "Time to production",
+    value: "30 days",
+    icon: Timer,
+    description: "Acceptance-tested. Not a demo.",
+  },
+  {
+    label: "Vendors on the bill",
+    value: "1",
+    icon: Layers,
+    description: "Cloudflare-native. No Pinecone, no Vercel sprawl.",
+  },
+  {
+    label: "Refund clause",
+    value: "100%",
+    icon: FileCheck2,
+    description: "Miss the criteria you signed, get your money back.",
+  },
+  {
+    label: "Flagship in market",
+    value: "100+",
+    icon: Globe2,
+    description: "Countries running our AudioPod product daily.",
+  },
 ];
 
 export function Stats() {

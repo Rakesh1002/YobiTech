@@ -22,7 +22,7 @@ export default function Home() {
             url: "https://yobitech.in",
             logo: "https://yobitech.in/logo.png",
             description:
-              "We partner with forward-thinking enterprises to design, build, and deploy AI-native applications that transform operations and unlock new possibilities.",
+              "Production AI agents on Cloudflare, shipped in 30 days. Fixed fee, money-back guarantee. For mid-market SaaS teams stuck in POC purgatory.",
             foundingDate: "2023",
             address: {
               "@type": "PostalAddress",
@@ -44,12 +44,13 @@ export default function Home() {
               "https://twitter.com/yobitech",
             ],
             knowsAbout: [
-              "Artificial Intelligence",
-              "Machine Learning",
+              "AI Agents",
+              "Cloudflare Workers AI",
+              "Production AI Implementation",
+              "Retrieval-Augmented Generation",
+              "Multi-Agent Systems",
               "Large Language Models",
-              "Cloud Infrastructure",
-              "Software Development",
-              "Digital Transformation",
+              "Pilot Rescue",
             ],
           }),
         }}

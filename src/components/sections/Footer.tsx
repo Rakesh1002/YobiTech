@@ -19,7 +19,7 @@ export function Footer() {
                 YOBITECH
               </span>
               <p className="text-xs text-muted-foreground">
-                AI-Powered Enterprise Solutions
+                Production AI agents in 30 days.
               </p>
             </div>
           </div>

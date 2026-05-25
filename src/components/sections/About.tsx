@@ -1,61 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Target, Lightbulb, Users, Award } from "lucide-react";
+import { X } from "lucide-react";
 
-const values = [
-  {
-    icon: Target,
-    title: "Mission-Driven",
-    description: "We focus on outcomes that matter, not just deliverables.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovation First",
-    description: "We stay ahead of the curve with cutting-edge technologies.",
-  },
-  {
-    icon: Users,
-    title: "Partnership",
-    description: "We work as an extension of your team, not a vendor.",
-  },
-  {
-    icon: Award,
-    title: "Excellence",
-    description: "We hold ourselves to the highest standards of quality.",
-  },
+const wontDo = [
+  "Engagements under $25K",
+  "AI strategy decks or PowerPoint maturity assessments",
+  "Body-shopping or staff augmentation",
+  "Kubernetes",
+  "Six-month \"transformation\" timelines",
+  "Greenfield strategy without a build attached",
 ];
 
 export function About() {
   return (
     <section id="about" className="py-24">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-primary font-medium mb-3">About Us</p>
+            <p className="text-primary font-medium mb-3">Who we are</p>
             <h2 className="text-3xl sm:text-4xl font-bold mb-6">
-              Building the Future of Enterprise Technology
+              A productized boutique, not an agency.
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                YOBITECH is a technology consulting firm based in Bangalore, India.
-                We specialize in helping enterprises harness the power of AI, modern
-                software engineering, and cloud infrastructure to solve complex challenges.
+                Most enterprise AI pilots fail. RAND put the number at 80%. MIT
+                put it at 95%. Deloitte was forced to refund the Australian
+                government A$440K last year for an AI report full of hallucinated
+                citations. The boards still want the agent. The CTOs still need
+                to ship.
               </p>
               <p>
-                Founded in 2023, we&apos;ve grown from a small team of passionate engineers
-                to a diverse group of technologists, designers, and strategists united
-                by a common goal: building intelligent systems that create real business value.
+                YobiTech is built for that gap. We&apos;re a small team in Bangalore
+                that ships one thing well: production-grade AI agents on
+                Cloudflare, on a fixed fee, in 30 days. No SOWs, no scope creep,
+                no quarterly retainers that produce slide decks.
               </p>
               <p>
-                Our approach combines deep technical expertise with a genuine understanding
-                of business needs. We don&apos;t just build software—we build partnerships
-                that drive transformation.
+                Our flagship product, AudioPod, is live in 100+ countries and
+                profitable. We use the same engineering bar to build for clients
+                that we use on our own products. If that bar slips, you don&apos;t pay.
               </p>
             </div>
             <div className="mt-8 pt-6 border-t">
@@ -75,25 +64,27 @@ export function About() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="rounded-2xl border bg-gradient-to-br from-background to-muted/40 p-8"
           >
-            <div className="grid grid-cols-2 gap-4">
-              {values.map((value, index) => (
-                <motion.div
-                  key={value.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="p-5 rounded-xl border bg-gradient-to-br from-background to-muted/30 hover:border-primary/30 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                    <value.icon className="w-5 h-5 text-primary" />
+            <p className="text-primary font-medium mb-3">What we don&apos;t do</p>
+            <h3 className="text-2xl font-bold mb-4">
+              Saying no is the product.
+            </h3>
+            <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
+              Tight scope is what makes the 30-day guarantee work. If you need
+              any of the below, we&apos;re the wrong shop, and we&apos;ll tell you in the
+              first 10 minutes of a call.
+            </p>
+            <ul className="space-y-3">
+              {wontDo.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-red-500/10 text-red-500 flex items-center justify-center mt-0.5 shrink-0">
+                    <X className="w-3 h-3" />
                   </div>
-                  <h3 className="font-semibold mb-1">{value.title}</h3>
-                  <p className="text-sm text-muted-foreground">{value.description}</p>
-                </motion.div>
+                  <span className="text-sm leading-relaxed">{item}</span>
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         </div>
       </div>

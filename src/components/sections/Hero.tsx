@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronDown, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
@@ -34,23 +34,26 @@ export function Hero() {
             transition={{ delay: 0.1, duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8"
           >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary">AI-Powered Enterprise Solutions</span>
+            <ShieldCheck className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium text-primary">
+              30 days to production. Or your money back.
+            </span>
           </motion.div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-[1.1] tracking-tight">
             <span className="bg-clip-text text-transparent bg-gradient-to-br from-foreground via-foreground to-foreground/70">
-              Build Intelligent
+              Production AI agents,
             </span>
             <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-violet-500 to-primary">
-              Systems That Scale
+              shipped in 30 days.
             </span>
           </h1>
 
           <p className="text-muted-foreground text-lg sm:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
-            We partner with forward-thinking enterprises to design, build, and deploy
-            AI-native applications that transform operations and unlock new possibilities.
+            We build Cloudflare-native AI agents for mid-market SaaS teams stuck
+            in POC purgatory. Fixed fee. You sign the acceptance criteria on day one.
+            If we don&apos;t hit them, you don&apos;t pay.
           </p>
 
           <motion.div
@@ -65,7 +68,7 @@ export function Hero() {
               asChild
             >
               <a href="#contact">
-                <span className="relative z-10">Start a Project</span>
+                <span className="relative z-10">Book a 30-min call</span>
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
@@ -76,9 +79,13 @@ export function Hero() {
               className="rounded-full border-border/50 hover:bg-muted/50 hover:border-primary/30"
               asChild
             >
-              <a href="#services">Explore Services</a>
+              <a href="#pricing">See pricing</a>
             </Button>
           </motion.div>
+
+          <p className="mt-6 text-xs text-muted-foreground">
+            3 slots open this month. We&apos;ll tell you in 48 hours if your problem fits.
+          </p>
         </motion.div>
       </div>
 
@@ -91,7 +98,7 @@ export function Hero() {
       </motion.div>
 
       <h1 className="sr-only">
-        YOBITECH - AI-Powered Enterprise Solutions & Digital Transformation
+        YOBITECH - Production AI agents on Cloudflare, shipped in 30 days, fixed fee, money-back guarantee
       </h1>
     </section>
   );

@@ -60,10 +60,14 @@ export function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <p className="text-primary font-medium mb-3">Contact Us</p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Let&apos;s Build Something Great</h2>
+          <p className="text-primary font-medium mb-3">Talk to us</p>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+            Tell us what failed in your last pilot.
+          </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Have a project in mind? We&apos;d love to hear about it. Reach out and let&apos;s explore how we can help.
+            30-minute scoping call, no slides, no junior account exec. We&apos;ll tell
+            you in 48 hours if your problem fits a SKU — and if it doesn&apos;t,
+            we&apos;ll tell you who&apos;s a better fit.
           </p>
         </motion.div>
 
@@ -162,7 +166,7 @@ export function Contact() {
               <div>
                 <textarea
                   {...register("message")}
-                  placeholder="Tell us about your project..."
+                  placeholder="What did your last AI pilot try to do, and where did it stall?"
                   rows={5}
                   className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all resize-none ${
                     errors.message ? "border-red-500" : "border-border"
