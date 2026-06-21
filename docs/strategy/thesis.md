@@ -415,3 +415,6 @@ If 1 of those 5 says yes, you have a venture. If 0 of 5 say yes, the wedge is wr
 - [AE Studio — Growjo revenue estimate](https://growjo.com/company/AE_Studio)
 - [Tradebrains — Fractal Analytics IPO](https://tradebrains.in/fractal-analytics-ipo-what-are-the-companys-key-products-and-ai-focus/)
 - [Techaisle — 2026 SMB & Mid-market predictions](https://techaisle.com/blog/661-top-10-smb-mid-market-predictions-for-2026-and-beyond)
+
+---
+**Owner:** Rakesh Roushan · **Last reviewed:** 2026-06-21 · **Review by:** 2026-09-21
